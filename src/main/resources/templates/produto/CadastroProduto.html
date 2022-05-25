@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="erro : ${#fields.detailedErrors('${produto.*}')}">
+    <span th:text="${erro.message}"></span>
+</div>
+
+<form method="post" th:object="${produto}">
+    <span th:text="${mensagem}">Erro!</span>
+    <br>
+    <label for="sku">SKU</label>
+    <input type="text" id="sku" th:field="*{sku}">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" th:field="*{nome}">
+    <label for="descricao">Descrição</label>
+    <textarea rows="3" cols="30" id="descricao" th:field="*{descricao}"></textarea>
+    <input type="submit" value="Salvar">
+
+</form>
+
+</body>
+</html>
