@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/LayoutPadrao">
-<head></head>
 
 <body>
 
@@ -58,7 +57,7 @@
                 <div class="col-sm-3 form-group">
                     <label for="teorAlcoolico">Teor Alcoólico</label>
                     <div class="input-group">
-                        <input id="teorAlcoolico" type="number" class="form-control"/>
+                        <input id="teorAlcoolico" type="text" class="form-control js-currency"/>
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>
@@ -81,18 +80,21 @@
             <div class="row">
                 <div class="col-sm-3 form-group">
                     <label for="preco">Preço</label>
-                    <input id="preco" type="number" class="form-control"/>
-                </div>
-                <div class="col-sm-3 form-group">
-                    <label for="comicao">Comição</label>
                     <div class="input-group">
-                        <input id="comicao" type="number" class="form-control"/>
-                        <div class="input-group-addon">%</div>
+                        <div class="input-group-addon">R$</div>
+                        <input id="preco" type="text" class="form-control js-currency"/>
                     </div>
                 </div>
                 <div class="col-sm-3 form-group">
+                    <label for="comissao">Comissão</label>
+                    <div class="input-group">
+                        <input id="comissao" type="text" class="form-control js-currency"/>
+                        <div class="input-group-addon">%</div>
+                    </div>
+                </div>
+                <div class="col-sm-1 form-group">
                     <label for="estoque">Estoque</label>
-                    <input id="estoque" type="number" class="form-control"/>
+                    <input id="estoque" type="text" class="form-control"/>
                 </div>
 
             </div>
