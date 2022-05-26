@@ -28,4 +28,5 @@ public class ProdutosController {
         System.out.println(">>> sku" + produto.getSku());
         return "redirect:/produtos/novo";
     }
+
 }
