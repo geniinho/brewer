@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/LayoutPadrao">
+
+<body>
+
+<head>
+    <title>Cadastro de cliente</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h1>Cadastro de clientes</h1>
+                </div>
+
+                <div class="col-xs-2">
+                    <div class="aw-page-header-controls">
+                        <a class="btn  btn-default">
+                            <i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisar cliente</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <form method="POST" th:object="${cliente}" th:action="@{/clientes/novo}">
+
+
+            <div class="row">
+                <div class="form-group  col-sm-12  bw-required">
+                    <label for="nome" class="control-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" autofocus="autofocus"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group  col-sm-4  bw-required">
+                    <label class="control-label">Tipo pessoa</label>
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="form-group  col-sm-8  bw-required">
+                    <label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label>
+                    <input type="text" class="form-control" id="cpfOuCnpj" disabled/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group  col-sm-4">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" class="form-control  js-phone-number" id="telefone"/>
+                </div>
+
+                <div class="form-group  col-sm-8">
+                    <label for="email" class="control-label">E-mail</label>
+                    <input type="text" class="form-control" id="email"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group  col-sm-4">
+                    <label for="logradouro">Logradouro</label>
+                    <input type="text" class="form-control" id="logradouro"/>
+                </div>
+
+                <div class="form-group  col-sm-4">
+                    <label for="numero">Número</label>
+                    <input type="text" class="form-control" id="numero"/>
+                </div>
+
+                <div class="form-group  col-sm-4">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" class="form-control" id="complemento"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group  col-sm-4">
+                    <label for="cep">CEP</label>
+                    <input type="text" class="form-control  js-cep" id="cep"/>
+                </div>
+
+                <div class="form-group  col-sm-4">
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control">
+                        <option value="">Selecione o estado</option>
+                        <option>Acre</option>
+                    </select>
+                </div>
+
+                <div class="form-group  col-sm-4">
+                    <label for="cidade">Cidade</label>
+                    <div class="bw-field-action">
+                        <input type="hidden" id="inputHiddenCidadeSelecionada"/>
+                        <select id="cidade" class="form-control"></select>
+
+                        <div class="bw-field-action__icon  js-img-loading" style="display: none">
+                            <img src=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn  btn-primary">Salvar</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
