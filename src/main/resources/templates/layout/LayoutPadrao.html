@@ -9,10 +9,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
     <title>Brewer</title>
 
-    <link rel="stylesheet" type="text/css" href="/layout/stylesheets/vendors.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/layout/stylesheets/algaworks.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/layout/stylesheets/application.css"/>
-    <link rel="stylesheet" type="text/css" href="/layout/stylesheets/brewer.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/brewer.css}"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,11 +38,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 </div>
 
 
-<script src="/layout/javascripts/vendors.min.js"></script>
-<script src="/layout/javascripts/algaworks.min.js"></script>
+<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-<th:block layout:fragment="javascript-extra" ></th:block>
+<th:block layout:fragment="javascript-extra"></th:block>
 <script>
     $(function () {
 
