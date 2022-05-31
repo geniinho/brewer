@@ -1,6 +1,8 @@
 package com.algaworks.brewer.controller;
 
 import com.algaworks.brewer.model.Produto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -13,7 +15,6 @@ import javax.validation.Valid;
 
 @Controller
 public class ProdutosController {
-
     @RequestMapping("/produtos/novo")
     public String novo(Produto produto){
         return "produto/CadastroProduto";
