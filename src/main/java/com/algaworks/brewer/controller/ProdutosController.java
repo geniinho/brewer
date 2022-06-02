@@ -39,21 +39,12 @@ public class ProdutosController {
     @RequestMapping(value = "/produtos/novo", method = RequestMethod.POST)
     public ModelAndView cadastrar(@Valid Produto produto, BindingResult result, Model model, RedirectAttributes attributes){
 
-//        if (result.hasErrors()){
-//            return novo(produto);
-//        }
+        if (result.hasErrors()){
+            return novo(produto);
+        }
 
         cadastroProdutoService.salvar(produto);
         attributes.addFlashAttribute("mensagem","Produto salvo com sucesso.");
-//        System.out.println(">>>>>" + produto.getSku());
-//        System.out.println(">>>>>" + produto.getNome());
-//        System.out.println(">>>>>" + produto.getDescricao());
-//        System.out.println(">>>>>" + produto.getEstilo());
-//        System.out.println(">>>>>" + produto.getSabor());
-//        System.out.println(">>>>>" + produto.getTeorAlcoolico());
-//        System.out.println(">>>>>" + produto.getValor());
-//        System.out.println(">>>>>" + produto.getComissao());
-//        System.out.println(">>>>>" + produto.getQuantidadeEstoque());
         return  new ModelAndView("redirect:/produtos/novo");
     }
 

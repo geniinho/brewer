@@ -11,7 +11,7 @@ public class CadastroProdutoService {
     @Autowired
     ProdutoRepository produtoRepository;
 
-
+    @Transactional
     public void salvar(Produto produto){
         produtoRepository.save(produto);
     }
