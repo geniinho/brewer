@@ -7,6 +7,7 @@ import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
 import com.algaworks.brewer.repository.EstiloRepository;
 import com.algaworks.brewer.service.CadastroEstiloService;
+import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-public class EstiloController {
+public class EstilosController {
 
     @Autowired
     EstiloRepository estiloRepository;
@@ -41,7 +42,13 @@ public class EstiloController {
             return novo(estilo);
         }
 
-        cadastroEstiloService.salvar(estilo);
+        try{
+            cadastroEstiloService.salvar(estilo);
+        }
+        catch (NomeEstiloJaCadastradoException e){
+            result.rejectValue("nome", e.getMessage(), e.getMessage());
+            return novo(estilo);
+        }
         attributes.addFlashAttribute("mensagem","Estilo salvo com sucesso.");
         return  new ModelAndView("redirect:/estilos/novo");
     }
