@@ -1,5 +1,7 @@
 package com.algaworks.brewer.model;
 
+import com.algaworks.brewer.validation.SKU;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -13,7 +15,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
-    @Pattern(regexp ="([a-zA-Z]{2}\\d{4})?",message = "O SKU deve seguir o padrão: XX9999") //Padrão de 2 letras e 4 Digitos
+    @SKU
     @NotBlank(message = "SKU é obrigatório")
     private String sku;
     @NotBlank(message = "Nome é obrigatório")
