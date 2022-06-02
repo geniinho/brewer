@@ -2,6 +2,7 @@ package com.algaworks.brewer.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -12,6 +13,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
+    @Pattern(regexp ="([a-zA-Z]{2}\\d{4})",message = "O SKU deve seguir o padrão: XX9999") //Padrão de 2 letras e 4 Digitos
     @NotBlank(message = "SKU é obrigatório")
     private String sku;
     @NotBlank(message = "Nome é obrigatório")
