@@ -13,7 +13,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
-    @Pattern(regexp ="([a-zA-Z]{2}\\d{4})",message = "O SKU deve seguir o padrão: XX9999") //Padrão de 2 letras e 4 Digitos
+    @Pattern(regexp ="([a-zA-Z]{2}\\d{4})?",message = "O SKU deve seguir o padrão: XX9999") //Padrão de 2 letras e 4 Digitos
     @NotBlank(message = "SKU é obrigatório")
     private String sku;
     @NotBlank(message = "Nome é obrigatório")
