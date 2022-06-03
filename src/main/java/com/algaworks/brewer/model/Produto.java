@@ -25,7 +25,7 @@ public class Produto {
     private String descricao;
 
     @NotNull(message = "Valor é obrigatório")
-    @DecimalMin(value = "0.50", message = "O valor da cerveja deve ser maior que R$0,50")
+    @DecimalMin(value = "1.00", message = "O valor da cerveja deve ser maior que R$1,00")
     @DecimalMax(value = "9999999.99", message = "O valor da cerveja deve ser menor que R$9.999.999,99")
     private BigDecimal valor;
 
@@ -54,6 +54,11 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "codigo_estilo")
     private Estilo estilo;
+
+    @PrePersist @PreUpdate
+    private void prePersistUpdate(){
+        sku = sku.toUpperCase();
+    }
 
     public Long getCodigo() {
         return codigo;
