@@ -20,6 +20,6 @@ public class CadastroEstiloService {
         if(estiloOptional.isPresent()){
             throw new NomeEstiloJaCadastradoException("Estilo já cadastrado");
         }
-        estiloRepository.save(estilo);
+        estiloRepository.saveAndFlush(estilo);
     }
 }
