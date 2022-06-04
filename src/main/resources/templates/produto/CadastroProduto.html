@@ -5,15 +5,12 @@
       xmlns:brewer="http://brewer.com"
       layout:decorate="layout/LayoutPadrao">
 
-<body>
 
 <head>
     <title>Cadastro de produto</title>
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/upload.min.css}"/>-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/css/uikit.min.css" />
-
 </head>
-
+<body>
 <section layout:fragment="conteudo">
 
 
@@ -26,12 +23,11 @@
     </div>
 
     <div class="container-fluid">
-
-        <th:block th:include="fragments/MensagemSucesso" ></th:block>
-
-        <form method="post" th:object="${produto}" class="form-vertical">
-
+            <th:block th:include="fragments/MensagemSucesso" ></th:block>
+        <form method="POST" th:object="${produto}" class="form-vertical">
             <th:block th:include="fragments/MensagensErroValidacao" ></th:block>
+
+            <input type="hidden" th:field="*{codigo}">
 
             <div class="row">
                 <div class="col-sm-2  form-group bw-required" brewer:classforerror="sku">
@@ -56,7 +52,7 @@
                     <div class="bw-field-action">
                         <select id="estilo" class="form-control" th:field="*{estilo}">
                             <option value="">Selecione o estilo</option>
-                            <option th:each="estilo : ${estilos}" th:value="${estilo.codigo}" th:text="${estilo.nome}"></option>
+                            <option th:each="estilo : ${estilos}" th:value="${estilo.codigo}" th:text="${estilo.nome}">Pale lager</option>
                         </select>
 
                         <div class="bw-field-action__icon">
@@ -71,14 +67,14 @@
                     <label for="sabor" class="control-label">Sabor</label>
                     <select id="sabor" class="form-control" th:field="*{sabor}">
                         <option value="">Selecione o sabor</option>
-                        <option th:each="sabor : ${sabores}" th:value="${sabor}" th:text="${sabor.descricao}"></option>
+                        <option th:each="sabor : ${sabores}" th:value="${sabor}" th:text="${sabor.descricao}">Adocicada</option>
                     </select>
                 </div>
 
                 <div class="col-sm-3  form-group bw-required" brewer:classforerror="teorAlcoolico">
                     <label for="teorAlcoolico" class="control-label">Teor alcoólico</label>
                     <div class="input-group">
-                        <input id="teorAlcoolico" type="text" class="form-control  js-currency" th:field="*{teorAlcoolico}"/>
+                        <input id="teorAlcoolico" type="text" class="form-control  js-decimal" th:field="*{teorAlcoolico}"/>
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>
@@ -101,14 +97,14 @@
                     <label for="valor" class="control-label">Valor</label>
                     <div class="input-group">
                         <div class="input-group-addon">R$</div>
-                        <input id="valor" type="text" class="form-control  js-currency" th:field="*{valor}"/>
+                        <input id="valor" type="text" class="form-control  js-decimal" th:field="*{valor}"/>
                     </div>
                 </div>
 
                 <div class="col-sm-3  form-group bw-required" brewer:classforerror="comissao">
                     <label for="comissao" class="control-label">Comissão</label>
                     <div class="input-group">
-                        <input id="comissao" type="text" class="form-control  js-currency" th:field="*{comissao}"/>
+                        <input id="comissao" type="text" class="form-control  js-decimal" th:field="*{comissao}"/>
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>
@@ -121,12 +117,15 @@
 
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <label class="control-label">Foto</label>
-                    <div class="bw-upload">
-                        <i class="glyphicon glyphicon-cloud-upload"></i>
-                        <span>Arraste a foto aqui ou</span>
-                        <a class="bw-upload-form-file">selecione <input type="file" accept=".jpg,.jpeg,.png"/></a>
+                    <div class="js-upload uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Arraste a foto aqui ou</span>
+                        <div uk-form-custom>
+                            <input type="file">
+                            <span class="uk-link">selecione</span>
+                        </div>
                     </div>
+                    <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
                 </div>
             </div>
 
@@ -145,8 +144,66 @@
     <script th:src="@{/layout/javascripts/estilo.cadastro-rapido.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
-<!--    <script th:src="@{/layout/javascripts/uikit.min.js}"></script>-->
-<!--    <script th:src="@{/layout/javascripts/upload.min.js}"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/components/upload.min.js" integrity="sha512-hE8CY09YMM1RKWL4M3cGRpmAakaEvfGNMC596JXUWKHwDpIcpn1osIN9dK0RY0zUAFOSbpXTRdzPSC/WIB/UXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var bar = document.getElementById('js-progressbar');
+        UIkit.upload('.js-upload', {
+
+            type:'json',
+            url: '',
+            filelimit: 1,
+            allow: '*.(jpg|jpeg|png)',
+
+            beforeSend: function () {
+                console.log('beforeSend', arguments);
+            },
+            beforeAll: function () {
+                console.log('beforeAll', arguments);
+            },
+            load: function () {
+                console.log('load', arguments);
+            },
+            error: function () {
+                console.log('error', arguments);
+            },
+            complete: function () {
+                console.log('complete', arguments);
+            },
+
+            loadStart: function (e) {
+                console.log('loadStart', arguments);
+
+                bar.removeAttribute('hidden');
+                bar.max = e.total;
+                bar.value = e.loaded;
+            },
+
+            progress: function (e) {
+                console.log('progress', arguments);
+
+                bar.max = e.total;
+                bar.value = e.loaded;
+            },
+
+            loadEnd: function (e) {
+                console.log('loadEnd', arguments);
+
+                bar.max = e.total;
+                bar.value = e.loaded;
+            },
+
+            completeAll: function () {
+                console.log('completeAll', arguments);
+
+                setTimeout(function () {
+                    bar.setAttribute('hidden', 'hidden');
+                }, 1000);
+
+                alert('Upload feito com sucesso.');
+            }
+
+        });
+    </script>
 </th:block>
 
 </body>
